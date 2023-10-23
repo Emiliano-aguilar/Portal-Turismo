@@ -35,7 +35,7 @@ formulario.addEventListener('click', function (event) {
       descripcion: ${descripcionAviso} \n
       precio: ${precioAviso} \n
       Restricciones/características: ${infoAviso} \n
-      Img: link de IMG guardado.
+      Img: Imagens guardadas.
       `
     });}
   
