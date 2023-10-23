@@ -81,17 +81,17 @@ let comercios = {
 
 
 const contenerDeProcutos = document.getElementById('cuerpoAvisos');
-var filtroSupermercadoIsChecked = null;
-var filtroPerfumeriaIsChecked = null;
-var filtroOtrosIsChecked = null;
+var filtroSupermercadoIsChecked = true;
+var filtroPerfumeriaIsChecked = true;
+var filtroOtrosIsChecked = true;
 
 
 //ex checkVet
-function checkSupermercado() {
+//function checkSupermercado() {
 
    var filtroSupermercado = document.querySelector("input[name=Supermercado]");
-   filtroSupermercado.addEventListener('change', function () {
-      if (this.checked) {
+   filtroSupermercado.addEventListener('click', function () {
+      if (filtroSupermercado.checked) {
          filtroSupermercadoIsChecked = true;
          return filtroSupermercadoIsChecked;
       }
@@ -99,14 +99,15 @@ function checkSupermercado() {
          filtroSupermercadoIsChecked = false;
          return filtroSupermercadoIsChecked;
       }
-   });
-}
+   }
+   );
+//}
 
 // ex checkRefugio
-function checkPerfumeria() {
+//function checkPerfumeria() {
    var filtroPerfumeria = document.querySelector("input[name=Perfumeria]");
-   filtroPerfumeria.addEventListener('change', function () {
-      if (this.checked) {
+   filtroPerfumeria.addEventListener('click', function () {
+      if (filtroPerfumeria.checked) {
          filtroPerfumeriaIsChecked = true;
          return filtroPerfumeriaIsChecked;
       }
@@ -115,12 +116,12 @@ function checkPerfumeria() {
          return filtroPerfumeriaIsChecked;
       }
    });
-}
+//}
 // ex checkpeluqueria
-function checkOtros() {
+//function checkOtros() {
    var filtroOtros = document.querySelector("input[name=Otros]");
-   filtroOtros.addEventListener('change', function () {
-      if (this.checked) {
+   filtroOtros.addEventListener('click', function () {
+      if (filtroOtros.checked) {
          filtroOtrosIsChecked = true;
          return filtroOtrosIsChecked;
       }
@@ -129,7 +130,7 @@ function checkOtros() {
          return filtroOtrosIsChecked;
       }
    });
-}
+//}
 
 
 
@@ -177,11 +178,15 @@ buscador.addEventListener("click", function () {
 
 function filtrarOrganizaciones() {
 
+ 
+
 
    var produc = [];
 
 
-
+   //checkSupermercado();
+   //checkPerfumeria();
+   //checkOtros();
 
 
 
@@ -194,6 +199,8 @@ function filtrarOrganizaciones() {
 
 
       comercios.avisos.forEach((aviso) => {
+
+   
 
 
          // Ver todos
@@ -306,13 +313,17 @@ verTodosLosAvisos.addEventListener('click', function () {
 
 
 function mostrarOrganizacionFiltrada() {
-   checkSupermercado();
-   checkPerfumeria();
-   checkOtros();
+
+  // checkSupermercado();
+   //checkPerfumeria();
+   //checkOtros();
+
 
    contenerDeProcutos.innerHTML = "";
 
    filtrarOrganizaciones();
+
+   console.log("entre aaa")
 
 
 }
@@ -327,6 +338,10 @@ botonActualizar.addEventListener('click', mostrarOrganizacionFiltrada)
 //var actualizarAvisos = document.getElementById("actualizar-filtros");
 
 function añadirOrganizacionesAldoc(orgFiltro) {
+
+   
+
+
 
 
 
@@ -349,8 +364,14 @@ function añadirOrganizacionesAldoc(orgFiltro) {
                  </div>
                  <div class="col-md-8">
                    <div class="card-body">
-                     <h5 class="card-title">  Nombre ONG:  ${aviso.nombre}</h5>
-   
+                     <h5 class="card-title">${aviso.nombre}</h5>
+                     <p class="card-text">descripcion : ${aviso.detalle}</p>
+                     <p class="card-text">precio : ${aviso.precio}</p>
+                     <p class="card-text">precio : ${aviso.infoAdicional}</p>
+
+
+
+                     
                    </div>
                  </div>
                </div>
