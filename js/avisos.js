@@ -80,14 +80,13 @@ let comercios = {
 
 
 
-const contenerDeProcutos = document.getElementById('cuerpoAvisos');
+const contenedorDeAvisos = document.getElementById('cuerpoAvisos');
 var filtroSupermercadoIsChecked = true;
 var filtroPerfumeriaIsChecked = true;
 var filtroOtrosIsChecked = true;
 
 
-//ex checkVet
-//function checkSupermercado() {
+   // evento que del check Supermercados
 
    var filtroSupermercado = document.querySelector("input[name=Supermercado]");
    filtroSupermercado.addEventListener('click', function () {
@@ -101,10 +100,8 @@ var filtroOtrosIsChecked = true;
       }
    }
    );
-//}
 
-// ex checkRefugio
-//function checkPerfumeria() {
+   // evento que del check Perfumeria
    var filtroPerfumeria = document.querySelector("input[name=Perfumeria]");
    filtroPerfumeria.addEventListener('click', function () {
       if (filtroPerfumeria.checked) {
@@ -116,9 +113,9 @@ var filtroOtrosIsChecked = true;
          return filtroPerfumeriaIsChecked;
       }
    });
-//}
-// ex checkpeluqueria
-//function checkOtros() {
+
+
+   // evento que del check Otros
    var filtroOtros = document.querySelector("input[name=Otros]");
    filtroOtros.addEventListener('click', function () {
       if (filtroOtros.checked) {
@@ -130,8 +127,6 @@ var filtroOtrosIsChecked = true;
          return filtroOtrosIsChecked;
       }
    });
-//}
-
 
 
 let avisosFiltrados = [];
@@ -144,13 +139,12 @@ const inputBusqueda = document.getElementById("inputBusqueda");
 
 buscador.addEventListener("click", function () {
 
-   contenerDeProcutos.innerHTML = "";
+   contenedorDeAvisos.innerHTML = "";
    var produc = [];
    var valor = inputBusqueda.value;
    valor = valor.toLowerCase();
 
    productos.forEach((producto) => {
-
 
       producto.avisos.forEach((aviso) => {
 
@@ -163,165 +157,99 @@ buscador.addEventListener("click", function () {
 
       })
    })
-
-
-   añadirOrganizacionesAldoc(produc)
-
-
+   agregarAvisos(produc)
 })
 
-///////////////////////////////////////////
 
 
-
-
-
-function filtrarOrganizaciones() {
-
- 
-
+function filtrarAvisos() {
 
    var produc = [];
 
-
-   //checkSupermercado();
-   //checkPerfumeria();
-   //checkOtros();
-
-
-
-
    productos.forEach((comercios) => {
-
-
-
-
-
 
       comercios.avisos.forEach((aviso) => {
 
-   
-
-
-         // Ver todos
+         // Ver todas las categorias
          if (filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked
             && filtroOtrosIsChecked) {
 
-               console.log("entre1")
-
-
             if (aviso.supermercado || aviso.perfumeria || aviso.otros) {
-
-               console.log("entre1 y valide")
-
-
                produc.push(aviso);
             }
          }
-         //VER vete si y pelu si
+         // VER categorias supermercados y perfumeria
          else if (filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked
             && !filtroOtrosIsChecked) {
 
             if (aviso.supermercado || aviso.perfumeria)
                produc.push(aviso);
          }
-         // VER vet si, pelu no , refu si
+         // VER categorias supermercados y otros
          else if (filtroSupermercadoIsChecked && !filtroPerfumeriaIsChecked
             && filtroOtrosIsChecked) {
 
             if (aviso.supermercado || aviso.otros)
                produc.push(aviso);
          }
-         // VER pelu si, pelu NO, refu NO
+         // VER categoria supermercado
          else if (filtroSupermercadoIsChecked && !filtroPerfumeriaIsChecked
             && !filtroOtrosIsChecked) {
-
-               console.log("entrex222")
 
             if (aviso.supermercado)
                produc.push(aviso);
          }
-         //VER Vete no, PELU SI, REFU SI
+         //VER categorias perfumeria y otros
          else if (!filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked
             && filtroOtrosIsChecked) {
-
 
             if (aviso.perfumeria || aviso.otros)
                produc.push(aviso);
          }
-         // VER vete NO, pelu SI, refu NO
+         // Ver SOLO categoria Perfumeria
          else if (!filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked
             && !filtroOtrosIsChecked) {
-
-
             if (aviso.perfumeria) {
                produc.push(aviso);
             }
          }
-         //VETE NO, PELU NO, REFU SI
+         //Ver solo categoria OTros
          else if (!filtroSupermercadoIsChecked && !filtroPerfumeriaIsChecked
             && filtroOtrosIsChecked) {
 
             if (aviso.otros)
                produc.push(aviso);
          }
-
-
-
-         else {
-         }
-
-
-
-
-
       })
-
-
-
-
    })
 
-
-   añadirOrganizacionesAldoc(produc)
+   agregarAvisos(produc)
 
 
 }
 
 
-
-
 const botonActualizar = document.getElementById("actualizar-filtros");
 const verTodosLosAvisos = document.getElementById("ver-todo");
 
-
 verTodosLosAvisos.addEventListener('click', function () {
 
-
-   contenerDeProcutos.innerHTML = "";
-
+   contenedorDeAvisos.innerHTML = "";
 
    productos.forEach((produ)=>{
 
-
-      añadirOrganizacionesAldoc(produ.avisos);
-
+      agregarAvisos(produ.avisos);
 
    })
 })
 
 
 
-function mostrarOrganizacionFiltrada() {
+function avisosFiltrados() {
 
-  // checkSupermercado();
-   //checkPerfumeria();
-   //checkOtros();
+   contenedorDeAvisos.innerHTML = "";
 
-
-   contenerDeProcutos.innerHTML = "";
-
-   filtrarOrganizaciones();
+   filtrarAvisos();
 
    console.log("entre aaa")
 
@@ -329,28 +257,12 @@ function mostrarOrganizacionFiltrada() {
 }
 
 
-botonActualizar.addEventListener('click', mostrarOrganizacionFiltrada)
+botonActualizar.addEventListener('click', avisosFiltrados)
 
 
-
-
-
-//var actualizarAvisos = document.getElementById("actualizar-filtros");
-
-function añadirOrganizacionesAldoc(orgFiltro) {
-
-   
-
-
-
-
+function agregarAvisos(orgFiltro) {
 
    orgFiltro.forEach((aviso) => {
-
-      console.log(aviso)
-
-
-      //   producto.avisos.forEach((producto) => {
 
       console.log("entre" + aviso)
       const div = document.createElement(`div`)
@@ -368,28 +280,14 @@ function añadirOrganizacionesAldoc(orgFiltro) {
                      <p class="card-text">descripcion : ${aviso.detalle}</p>
                      <p class="card-text">precio : ${aviso.precio}</p>
                      <p class="card-text">precio : ${aviso.infoAdicional}</p>
-
-
-
-                     
                    </div>
                  </div>
                </div>
              </div>`
 
-      contenerDeProcutos.append(div);
+      contenedorDeAvisos.append(div);
 
 
    })
 
-
-
-   
-
-
-
-
-
-
-   //  })
 }
