@@ -23,7 +23,22 @@ let comercios = {
                otros: false,
                // hace referencia a Restricciones (servicio) o caracteristicas (producto)
                infoAdicional: "Leche 1L",
-               precio: "sin precio",
+               precio: "sin precio asignado",
+               estado: "vigente",
+
+            },
+            {
+               nombre: "Leche",
+               detalle: "Leche VI",
+               img1: "https://us.123rf.com/450wm/kahovsky/kahovsky2008/kahovsky200800097/154187168-linda-leche-divertida-feliz-icono-de-ilustraci%C3%B3n-de-personaje-kawaii-de-dibujos-animados-de-l%C3%ADnea.jpg?ver=6",
+               img2: "https://previews.123rf.com/images/yuwnis07/yuwnis072211/yuwnis07221100038/194959154-leche-de-caricatura-animada-plana-en-ilustraci%C3%B3n-de-caja-de-papel-grande-bebidas-ricas-en-calcio.jpg",
+               img3: "https://dibujos-paracolorear.de/wp-content/uploads/2020/05/imagenes-leches.png",
+               supermercado: true,
+               perfumeria: false,
+               otros: false,
+               // hace referencia a Restricciones (servicio) o caracteristicas (producto)
+               infoAdicional: "Leche 1L",
+               precio: "$1.200",
                estado: "vigente",
 
             },
@@ -68,7 +83,7 @@ let comercios = {
                otros: true,
                // hace referencia a Restricciones (servicio) o caracteristicas (producto)
                infoAdicional: "5kg de asado",
-               precio: "sin precio",
+               precio: "$5.000",
                estado: "vigente",
 
             }
@@ -80,13 +95,12 @@ let comercios = {
 
 
 
-const contenedorDeAvisos = document.getElementById('cuerpoAvisos');
+const contenerDeProcutos = document.getElementById('cuerpoAvisos');
 var filtroSupermercadoIsChecked = true;
 var filtroPerfumeriaIsChecked = true;
 var filtroOtrosIsChecked = true;
 
 
-   // evento que del check Supermercados
 
    var filtroSupermercado = document.querySelector("input[name=Supermercado]");
    filtroSupermercado.addEventListener('click', function () {
@@ -101,7 +115,6 @@ var filtroOtrosIsChecked = true;
    }
    );
 
-   // evento que del check Perfumeria
    var filtroPerfumeria = document.querySelector("input[name=Perfumeria]");
    filtroPerfumeria.addEventListener('click', function () {
       if (filtroPerfumeria.checked) {
@@ -114,8 +127,6 @@ var filtroOtrosIsChecked = true;
       }
    });
 
-
-   // evento que del check Otros
    var filtroOtros = document.querySelector("input[name=Otros]");
    filtroOtros.addEventListener('click', function () {
       if (filtroOtros.checked) {
@@ -139,12 +150,13 @@ const inputBusqueda = document.getElementById("inputBusqueda");
 
 buscador.addEventListener("click", function () {
 
-   contenedorDeAvisos.innerHTML = "";
+   contenerDeProcutos.innerHTML = "";
    var produc = [];
    var valor = inputBusqueda.value;
    valor = valor.toLowerCase();
 
    productos.forEach((producto) => {
+
 
       producto.avisos.forEach((aviso) => {
 
@@ -157,8 +169,12 @@ buscador.addEventListener("click", function () {
 
       })
    })
-   agregarAvisos(produc)
+
+   añadirAvisosAlDOM(produc)
+
 })
+
+///////////////////////////////////////////
 
 
 
@@ -170,7 +186,7 @@ function filtrarAvisos() {
 
       comercios.avisos.forEach((aviso) => {
 
-         // Ver todas las categorias
+         // Ver todos
          if (filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked
             && filtroOtrosIsChecked) {
 
@@ -178,53 +194,57 @@ function filtrarAvisos() {
                produc.push(aviso);
             }
          }
-         // VER categorias supermercados y perfumeria
+         //ver solo supermercado y perfumeria
          else if (filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked
             && !filtroOtrosIsChecked) {
 
             if (aviso.supermercado || aviso.perfumeria)
                produc.push(aviso);
          }
-         // VER categorias supermercados y otros
+         //ver solo supermercado y otros
          else if (filtroSupermercadoIsChecked && !filtroPerfumeriaIsChecked
             && filtroOtrosIsChecked) {
 
             if (aviso.supermercado || aviso.otros)
                produc.push(aviso);
          }
-         // VER categoria supermercado
+         //ver solo supermercado
          else if (filtroSupermercadoIsChecked && !filtroPerfumeriaIsChecked
             && !filtroOtrosIsChecked) {
 
             if (aviso.supermercado)
                produc.push(aviso);
          }
-         //VER categorias perfumeria y otros
+         //ver solo filtrado otros y perfumeria
          else if (!filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked
             && filtroOtrosIsChecked) {
+
 
             if (aviso.perfumeria || aviso.otros)
                produc.push(aviso);
          }
-         // Ver SOLO categoria Perfumeria
+         //ver solo filtrado perfumeria
          else if (!filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked
             && !filtroOtrosIsChecked) {
+
+
             if (aviso.perfumeria) {
                produc.push(aviso);
             }
          }
-         //Ver solo categoria OTros
+         //ver solo filtrado otros
          else if (!filtroSupermercadoIsChecked && !filtroPerfumeriaIsChecked
             && filtroOtrosIsChecked) {
 
             if (aviso.otros)
                produc.push(aviso);
          }
+
       })
+
    })
 
-   agregarAvisos(produc)
-
+   añadirAvisosAlDOM(produc)
 
 }
 
@@ -232,37 +252,35 @@ function filtrarAvisos() {
 const botonActualizar = document.getElementById("actualizar-filtros");
 const verTodosLosAvisos = document.getElementById("ver-todo");
 
+
 verTodosLosAvisos.addEventListener('click', function () {
 
-   contenedorDeAvisos.innerHTML = "";
+   contenerDeProcutos.innerHTML = "";
 
    productos.forEach((produ)=>{
-
-      agregarAvisos(produ.avisos);
-
+      añadirAvisosAlDOM(produ.avisos);
    })
 })
 
 
 
-function avisosFiltrados() {
+function mostrarAvisosFiltrados() {
 
-   contenedorDeAvisos.innerHTML = "";
+   contenerDeProcutos.innerHTML = "";
 
    filtrarAvisos();
 
    console.log("entre aaa")
-
-
 }
 
+botonActualizar.addEventListener('click', mostrarAvisosFiltrados)
 
-botonActualizar.addEventListener('click', avisosFiltrados)
 
+function añadirAvisosAlDOM(avisos) {
 
-function agregarAvisos(orgFiltro) {
+   avisos.forEach((aviso) => {
 
-   orgFiltro.forEach((aviso) => {
+      console.log(aviso)
 
       console.log("entre" + aviso)
       const div = document.createElement(`div`)
@@ -280,13 +298,15 @@ function agregarAvisos(orgFiltro) {
                      <p class="card-text">descripcion : ${aviso.detalle}</p>
                      <p class="card-text">precio : ${aviso.precio}</p>
                      <p class="card-text">precio : ${aviso.infoAdicional}</p>
+
+
+                     
                    </div>
                  </div>
                </div>
              </div>`
 
-      contenedorDeAvisos.append(div);
-
+      contenerDeProcutos.append(div);
 
    })
 
