@@ -3,8 +3,8 @@ let comercios = {
       {
          nombre: "Supermercado Atomo",
          detalle: "Supermercado 24 hrs",
-         direccion: "Calle de la Madera 80",
-         coordenadas: [-32.34083419270822, -64.99961576175582],
+         direccion: "Coronel Mercau 1166, D5881 Merlo, San Luis",
+         coordenadas: [-32.33847916071844, -65.01406774630965],
          horario: "Lunes a Domingo de 8 a 14",
          telefono: "1123457895",
          img1: "https://lh5.googleusercontent.com/p/AF1QipNdNKZnYfWNwHBPT3QsoBArPdYtqYHdImxNsQAk=w408-h307-k-no",
@@ -62,9 +62,9 @@ let comercios = {
       },
       {
          nombre: "Carniceria",
-         detalle: "Supermercado 24 hrs",
-         direccion: "Calle de la Madera 80",
-         coordenadas: [-32.34083419270822, -64.99961576175582],
+         detalle: "Carniceria Familiar",
+         direccion: "Avenida Nte. 1440, D5881 Merlo, San Luis",
+         coordenadas: [-32.336086722050766, -65.01425911745416],
          horario: "Lunes a Domingo de 8 a 14",
          telefono: "1123457895",
          img1: "https://cloudfront-us-east-1.images.arcpublishing.com/radiomitre/WOSQKJ7TP5ERZH4RP3LP6UZ5KE.jpg",
@@ -94,6 +94,48 @@ let comercios = {
 
 
 
+//////////////////////////////////MAPA//////////////////////////////
+
+
+
+var map = L.map('map').setView([-32.346975285600216, -65.00391276013097], 14);
+
+
+
+
+var comercioIcon = L.icon({
+   iconUrl: 'img/comercioIcono.png',
+   iconSize: [38, 45],
+   iconAnchor: [22, 30],
+   popupAnchor: [-3, -10]
+});
+
+function llenarMapa(comerciosACompletar) {
+
+
+
+
+
+   console.log("111+ :" + comerciosACompletar)
+   comerciosACompletar.forEach((comercio) => {
+      L.marker(comercio.coordenadas, { icon: comercioIcon }).addTo(map).bindPopup("<b>" + comercio.nombre + "</b><br>" + comercio.direccion + "</b><br>Horario: " + comercio.horario);
+
+   });
+}
+
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+   maxZoom: 20,
+   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+
+
+/////////////////////////////////////////////////////Logica//////////////////////////////////////////////
+
+
+
+
 
 const contenerDeProcutos = document.getElementById('cuerpoAvisos');
 var filtroSupermercadoIsChecked = true;
@@ -102,46 +144,45 @@ var filtroOtrosIsChecked = true;
 
 
 
-   var filtroSupermercado = document.querySelector("input[name=Supermercado]");
-   filtroSupermercado.addEventListener('click', function () {
-      if (filtroSupermercado.checked) {
-         filtroSupermercadoIsChecked = true;
-         return filtroSupermercadoIsChecked;
-      }
-      else {
-         filtroSupermercadoIsChecked = false;
-         return filtroSupermercadoIsChecked;
-      }
+var filtroSupermercado = document.querySelector("input[name=Supermercado]");
+filtroSupermercado.addEventListener('click', function () {
+   if (filtroSupermercado.checked) {
+      filtroSupermercadoIsChecked = true;
+      return filtroSupermercadoIsChecked;
    }
-   );
+   else {
+      filtroSupermercadoIsChecked = false;
+      return filtroSupermercadoIsChecked;
+   }
+}
+);
 
-   var filtroPerfumeria = document.querySelector("input[name=Perfumeria]");
-   filtroPerfumeria.addEventListener('click', function () {
-      if (filtroPerfumeria.checked) {
-         filtroPerfumeriaIsChecked = true;
-         return filtroPerfumeriaIsChecked;
-      }
-      else {
-         filtroPerfumeriaIsChecked = false;
-         return filtroPerfumeriaIsChecked;
-      }
-   });
+var filtroPerfumeria = document.querySelector("input[name=Perfumeria]");
+filtroPerfumeria.addEventListener('click', function () {
+   if (filtroPerfumeria.checked) {
+      filtroPerfumeriaIsChecked = true;
+      return filtroPerfumeriaIsChecked;
+   }
+   else {
+      filtroPerfumeriaIsChecked = false;
+      return filtroPerfumeriaIsChecked;
+   }
+});
 
-   var filtroOtros = document.querySelector("input[name=Otros]");
-   filtroOtros.addEventListener('click', function () {
-      if (filtroOtros.checked) {
-         filtroOtrosIsChecked = true;
-         return filtroOtrosIsChecked;
-      }
-      else {
-         filtroOtrosIsChecked = false;
-         return filtroOtrosIsChecked;
-      }
-   });
+var filtroOtros = document.querySelector("input[name=Otros]");
+filtroOtros.addEventListener('click', function () {
+   if (filtroOtros.checked) {
+      filtroOtrosIsChecked = true;
+      return filtroOtrosIsChecked;
+   }
+   else {
+      filtroOtrosIsChecked = false;
+      return filtroOtrosIsChecked;
+   }
+});
 
 
-let avisosFiltrados = [];
-let productos = comercios.comercios
+let comercio = comercios.comercios
 
 
 const buscador = document.getElementById("buscador");
@@ -152,10 +193,11 @@ buscador.addEventListener("click", function () {
 
    contenerDeProcutos.innerHTML = "";
    var produc = [];
+   var comercios = [];
    var valor = inputBusqueda.value;
    valor = valor.toLowerCase();
 
-   productos.forEach((producto) => {
+   comercio.forEach((producto) => {
 
 
       producto.avisos.forEach((aviso) => {
@@ -165,12 +207,15 @@ buscador.addEventListener("click", function () {
 
          if (nombre.includes(valor)) {
             produc.push(aviso)
+            comercios.push(producto);
          }
 
       })
    })
+   llenarMapa(comercios)
+   añadirAvisosAlDOM(produc);
 
-   añadirAvisosAlDOM(produc)
+
 
 })
 
@@ -181,8 +226,12 @@ buscador.addEventListener("click", function () {
 function filtrarAvisos() {
 
    var produc = [];
+   var comerciosParaElmapa = [];
 
-   productos.forEach((comercios) => {
+
+
+   comercio.forEach((comercios) => {
+
 
       comercios.avisos.forEach((aviso) => {
 
@@ -192,6 +241,8 @@ function filtrarAvisos() {
 
             if (aviso.supermercado || aviso.perfumeria || aviso.otros) {
                produc.push(aviso);
+               comerciosParaElmapa.push(comercios);
+
             }
          }
          //ver solo supermercado y perfumeria
@@ -200,6 +251,8 @@ function filtrarAvisos() {
 
             if (aviso.supermercado || aviso.perfumeria)
                produc.push(aviso);
+            comerciosParaElmapa.push(comercios);
+
          }
          //ver solo supermercado y otros
          else if (filtroSupermercadoIsChecked && !filtroPerfumeriaIsChecked
@@ -207,6 +260,8 @@ function filtrarAvisos() {
 
             if (aviso.supermercado || aviso.otros)
                produc.push(aviso);
+            comerciosParaElmapa.push(comercios);
+
          }
          //ver solo supermercado
          else if (filtroSupermercadoIsChecked && !filtroPerfumeriaIsChecked
@@ -214,6 +269,8 @@ function filtrarAvisos() {
 
             if (aviso.supermercado)
                produc.push(aviso);
+            comerciosParaElmapa.push(comercios);
+
          }
          //ver solo filtrado otros y perfumeria
          else if (!filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked
@@ -222,6 +279,8 @@ function filtrarAvisos() {
 
             if (aviso.perfumeria || aviso.otros)
                produc.push(aviso);
+            comerciosParaElmapa.push(comercios);
+
          }
          //ver solo filtrado perfumeria
          else if (!filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked
@@ -230,6 +289,8 @@ function filtrarAvisos() {
 
             if (aviso.perfumeria) {
                produc.push(aviso);
+               comerciosParaElmapa.push(comercios);
+
             }
          }
          //ver solo filtrado otros
@@ -238,13 +299,18 @@ function filtrarAvisos() {
 
             if (aviso.otros)
                produc.push(aviso);
+            comerciosParaElmapa.push(comercios);
+
          }
 
       })
 
    })
 
-   añadirAvisosAlDOM(produc)
+
+   console.log(comerciosParaElmapa)
+   llenarMapa(comerciosParaElmapa);
+   añadirAvisosAlDOM(produc);
 
 }
 
@@ -256,10 +322,18 @@ const verTodosLosAvisos = document.getElementById("ver-todo");
 verTodosLosAvisos.addEventListener('click', function () {
 
    contenerDeProcutos.innerHTML = "";
+   var comerciosParaElmapa = [];
 
-   productos.forEach((produ)=>{
-      añadirAvisosAlDOM(produ.avisos);
+
+   comercio.forEach((comercio) => {
+      añadirAvisosAlDOM(comercio.avisos);
+      comerciosParaElmapa.push(comercio);
+
    })
+
+
+   llenarMapa(comercio);
+
 })
 
 
@@ -270,7 +344,7 @@ function mostrarAvisosFiltrados() {
 
    filtrarAvisos();
 
-   console.log("entre aaa")
+
 }
 
 botonActualizar.addEventListener('click', mostrarAvisosFiltrados)
@@ -278,11 +352,9 @@ botonActualizar.addEventListener('click', mostrarAvisosFiltrados)
 
 function añadirAvisosAlDOM(avisos) {
 
+
    avisos.forEach((aviso) => {
 
-      console.log(aviso)
-
-      console.log("entre" + aviso)
       const div = document.createElement(`div`)
       const image = document.createElement("img")
       image.src = aviso.img1
@@ -311,3 +383,4 @@ function añadirAvisosAlDOM(avisos) {
    })
 
 }
+
