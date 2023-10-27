@@ -111,15 +111,15 @@ var comercioIcon = L.icon({
 });
 
 function llenarMapa(comerciosACompletar) {
+   // Elimina todos los markers existentes en el mapa
+   map.eachLayer((layer) => {
+      if (layer instanceof L.Marker) {
+         map.removeLayer(layer);
+      }
+   });
 
-
-
-
-
-   console.log("111+ :" + comerciosACompletar)
    comerciosACompletar.forEach((comercio) => {
       L.marker(comercio.coordenadas, { icon: comercioIcon }).addTo(map).bindPopup("<b>" + comercio.nombre + "</b><br>" + comercio.direccion + "</b><br>Horario: " + comercio.horario);
-
    });
 }
 
@@ -229,86 +229,68 @@ function filtrarAvisos() {
    var comerciosParaElmapa = [];
 
 
-
    comercio.forEach((comercios) => {
 
 
       comercios.avisos.forEach((aviso) => {
 
-         // Ver todos
-         if (filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked
-            && filtroOtrosIsChecked) {
-
-            if (aviso.supermercado || aviso.perfumeria || aviso.otros) {
-               produc.push(aviso);
-               comerciosParaElmapa.push(comercios);
-
-            }
-         }
-         //ver solo supermercado y perfumeria
-         else if (filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked
-            && !filtroOtrosIsChecked) {
-
-            if (aviso.supermercado || aviso.perfumeria)
-               produc.push(aviso);
-            comerciosParaElmapa.push(comercios);
-
-         }
-         //ver solo supermercado y otros
-         else if (filtroSupermercadoIsChecked && !filtroPerfumeriaIsChecked
-            && filtroOtrosIsChecked) {
-
-            if (aviso.supermercado || aviso.otros)
-               produc.push(aviso);
-            comerciosParaElmapa.push(comercios);
-
-         }
-         //ver solo supermercado
-         else if (filtroSupermercadoIsChecked && !filtroPerfumeriaIsChecked
-            && !filtroOtrosIsChecked) {
-
-            if (aviso.supermercado)
-               produc.push(aviso);
-            comerciosParaElmapa.push(comercios);
-
-         }
-         //ver solo filtrado otros y perfumeria
-         else if (!filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked
-            && filtroOtrosIsChecked) {
-
-
-            if (aviso.perfumeria || aviso.otros)
-               produc.push(aviso);
-            comerciosParaElmapa.push(comercios);
-
-         }
-         //ver solo filtrado perfumeria
-         else if (!filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked
-            && !filtroOtrosIsChecked) {
-
-
-            if (aviso.perfumeria) {
-               produc.push(aviso);
-               comerciosParaElmapa.push(comercios);
-
-            }
-         }
-         //ver solo filtrado otros
-         else if (!filtroSupermercadoIsChecked && !filtroPerfumeriaIsChecked
-            && filtroOtrosIsChecked) {
-
-            if (aviso.otros)
-               produc.push(aviso);
-            comerciosParaElmapa.push(comercios);
-
-         }
-
+         switch (true) {
+            case filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked && filtroOtrosIsChecked:
+                if (aviso.supermercado || aviso.perfumeria || aviso.otros) {
+                    produc.push(aviso);
+                    comerciosParaElmapa.push(comercios);
+                }
+                break;
+        
+            case filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked && !filtroOtrosIsChecked:
+                if (aviso.supermercado || aviso.perfumeria) {
+                    produc.push(aviso);
+                    comerciosParaElmapa.push(comercios);
+                }
+                break;
+        
+            case filtroSupermercadoIsChecked && !filtroPerfumeriaIsChecked && filtroOtrosIsChecked:
+                if (aviso.supermercado || aviso.otros) {
+                    produc.push(aviso);
+                    comerciosParaElmapa.push(comercios);
+                }
+                break;
+        
+            case filtroSupermercadoIsChecked && !filtroPerfumeriaIsChecked && !filtroOtrosIsChecked:
+                if (aviso.supermercado) {
+                    produc.push(aviso);
+                    comerciosParaElmapa.push(comercios);
+                }
+                break;
+        
+            case !filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked && filtroOtrosIsChecked:
+                if (aviso.perfumeria || aviso.otros) {
+                    produc.push(aviso);
+                    comerciosParaElmapa.push(comercios);
+                }
+                break;
+        
+            case !filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked && !filtroOtrosIsChecked:
+                if (aviso.perfumeria) {
+                    produc.push(aviso);
+                    comerciosParaElmapa.push(comercios);
+                }
+                break;
+        
+            case !filtroSupermercadoIsChecked && !filtroPerfumeriaIsChecked && filtroOtrosIsChecked:
+                if (aviso.otros) {
+                    produc.push(aviso);
+                    comerciosParaElmapa.push(comercios);
+                }
+                break;
+        }
+        
       })
 
    })
 
 
-   console.log(comerciosParaElmapa)
+ 
    llenarMapa(comerciosParaElmapa);
    añadirAvisosAlDOM(produc);
 
