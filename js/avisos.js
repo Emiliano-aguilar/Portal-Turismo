@@ -110,6 +110,8 @@ var comercioIcon = L.icon({
    popupAnchor: [-3, -10]
 });
 
+
+//llena el mapa con los comercios que corresponden a la busqueda
 function llenarMapa(comerciosACompletar) {
 
    contenedorDeComercios.innerHTML = "";
@@ -149,6 +151,7 @@ var filtroPerfumeriaIsChecked = true;
 var filtroOtrosIsChecked = true;
 
 
+// actualiza en las variables de JS segun el estado del check "supermercado"
 
 var filtroSupermercado = document.querySelector("input[name=Supermercado]");
 filtroSupermercado.addEventListener('click', function () {
@@ -162,6 +165,7 @@ filtroSupermercado.addEventListener('click', function () {
    }
 }
 );
+// actualiza en las variables de JS segun el estado del check "perfumeria"
 
 var filtroPerfumeria = document.querySelector("input[name=Perfumeria]");
 filtroPerfumeria.addEventListener('click', function () {
@@ -174,7 +178,7 @@ filtroPerfumeria.addEventListener('click', function () {
       return filtroPerfumeriaIsChecked;
    }
 });
-
+// actualiza en las variables de JS segun el estado del check "otros"
 var filtroOtros = document.querySelector("input[name=Otros]");
 filtroOtros.addEventListener('click', function () {
    if (filtroOtros.checked) {
@@ -194,7 +198,7 @@ let comercio = comercios.comercios
 const buscador = document.getElementById("buscador");
 const inputBusqueda = document.getElementById("inputBusqueda");
 
-
+// Toma el Input del Buscador del front, y filtra los avisos con ese nombre
 buscador.addEventListener("click", function () {
 
    contenerDeProcutos.innerHTML = "";
@@ -228,7 +232,7 @@ buscador.addEventListener("click", function () {
 ///////////////////////////////////////////
 
 
-
+// Todas las casuisticas de filtrados de avisos, segun los check del Front
 function filtrarAvisos() {
 
    var produc = [];
@@ -303,7 +307,7 @@ function filtrarAvisos() {
 const botonActualizar = document.getElementById("actualizar-filtros");
 const verTodosLosAvisos = document.getElementById("ver-todo");
 
-
+// muestra todos los avisos con el boton "Ver todos los productos"
 verTodosLosAvisos.addEventListener('click', function () {
 
    contenerDeProcutos.innerHTML = "";
@@ -318,7 +322,7 @@ verTodosLosAvisos.addEventListener('click', function () {
 })
 
 
-
+// Filtra los avisos segun los check
 function mostrarAvisosFiltrados() {
    contenerDeProcutos.innerHTML = "";
    filtrarAvisos();
@@ -326,6 +330,7 @@ function mostrarAvisosFiltrados() {
 
 botonActualizar.addEventListener('click', mostrarAvisosFiltrados)
 
+// Crea en el HTML la lista con los avisos a mostrar, segun el listado de comercios que le brinden
 
 function añadirAvisosAlDOM(avisos) {
 
@@ -359,6 +364,8 @@ function añadirAvisosAlDOM(avisos) {
 
 }
 
+
+// Crea en el HTML la lista con comercios a mostrar, segun el listado de comercios que le brinden
 function añadirComerciosAlDOM(comercios){
    comercios.forEach((comercio) => {
 
@@ -375,11 +382,11 @@ function añadirComerciosAlDOM(comercios){
                    <div class="card-body">
                      <h5 class="card-title">${comercio.nombre}</h5>
                      <p class="card-text">descripcion : ${comercio.detalle}</p>
-                     <p class="card-text">precio : ${comercio.direccion}</p>
-                     <p class="card-text">precio : ${comercio.telefono}</p>
-                     <p class="card-text">precio : ${comercio.supermercado}</p>
-                     <p class="card-text">precio : ${comercio.perfumeria}</p>
-                     <p class="card-text">precio : ${comercio.otros}</p>
+                     <p class="card-text">Direccion : ${comercio.direccion}</p>
+                     <p class="card-text">Telefono : ${comercio.telefono}</p>
+                     <p class="card-text">Tiene articulos de Supermercado? : ${comercio.supermercado}</p>
+                     <p class="card-text">Tiene articulos de Perfumeria? : ${comercio.perfumeria}</p>
+                     <p class="card-text">Tiene articulo de Otras categorias?: ${comercio.otros}</p>
                    </div>
                  </div>
                </div>
