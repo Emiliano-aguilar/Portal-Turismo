@@ -111,13 +111,18 @@ var comercioIcon = L.icon({
 });
 
 function llenarMapa(comerciosACompletar) {
+
+   contenedorDeComercios.innerHTML = "";
+   añadirComerciosAlDOM(comerciosACompletar);
+
+
    // Elimina todos los markers existentes en el mapa
    map.eachLayer((layer) => {
       if (layer instanceof L.Marker) {
          map.removeLayer(layer);
       }
    });
-
+   // creo los nuevos markers
    comerciosACompletar.forEach((comercio) => {
       L.marker(comercio.coordenadas, { icon: comercioIcon }).addTo(map).bindPopup("<b>" + comercio.nombre + "</b><br>" + comercio.direccion + "</b><br>Horario: " + comercio.horario);
    });
@@ -138,6 +143,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 
 const contenerDeProcutos = document.getElementById('cuerpoAvisos');
+const contenedorDeComercios = document.getElementById('cuerpoComercios');
 var filtroSupermercadoIsChecked = true;
 var filtroPerfumeriaIsChecked = true;
 var filtroOtrosIsChecked = true;
@@ -289,11 +295,8 @@ function filtrarAvisos() {
 
    })
 
-
- 
    llenarMapa(comerciosParaElmapa);
    añadirAvisosAlDOM(produc);
-
 }
 
 
@@ -306,14 +309,10 @@ verTodosLosAvisos.addEventListener('click', function () {
    contenerDeProcutos.innerHTML = "";
    var comerciosParaElmapa = [];
 
-
    comercio.forEach((comercio) => {
       añadirAvisosAlDOM(comercio.avisos);
       comerciosParaElmapa.push(comercio);
-
    })
-
-
    llenarMapa(comercio);
 
 })
@@ -321,12 +320,8 @@ verTodosLosAvisos.addEventListener('click', function () {
 
 
 function mostrarAvisosFiltrados() {
-
    contenerDeProcutos.innerHTML = "";
-
    filtrarAvisos();
-
-
 }
 
 botonActualizar.addEventListener('click', mostrarAvisosFiltrados)
@@ -352,9 +347,6 @@ function añadirAvisosAlDOM(avisos) {
                      <p class="card-text">descripcion : ${aviso.detalle}</p>
                      <p class="card-text">precio : ${aviso.precio}</p>
                      <p class="card-text">precio : ${aviso.infoAdicional}</p>
-
-
-                     
                    </div>
                  </div>
                </div>
@@ -364,5 +356,37 @@ function añadirAvisosAlDOM(avisos) {
 
    })
 
+
+}
+
+function añadirComerciosAlDOM(comercios){
+   comercios.forEach((comercio) => {
+
+      const div = document.createElement(`div`)
+      const image = document.createElement("img")
+      image.src = comercio.img1
+      div.innerHTML = `<div class="card mb-3" style="max-width: 540px;">
+       
+               <div class="row g-0">
+                 <div class="col-md-4">
+                 <img src="${comercio.img1}" class="img-fluid rounded-start" alt="..."> 
+                 </div>
+                 <div class="col-md-8">
+                   <div class="card-body">
+                     <h5 class="card-title">${comercio.nombre}</h5>
+                     <p class="card-text">descripcion : ${comercio.detalle}</p>
+                     <p class="card-text">precio : ${comercio.direccion}</p>
+                     <p class="card-text">precio : ${comercio.telefono}</p>
+                     <p class="card-text">precio : ${comercio.supermercado}</p>
+                     <p class="card-text">precio : ${comercio.perfumeria}</p>
+                     <p class="card-text">precio : ${comercio.otros}</p>
+                   </div>
+                 </div>
+               </div>
+             </div>`
+
+      contenedorDeComercios.append(div);
+
+   })
 }
 
