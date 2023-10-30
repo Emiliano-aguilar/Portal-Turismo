@@ -21,6 +21,8 @@ let comercios = {
                supermercado: true,
                perfumeria: false,
                otros: false,
+               servicio: false,
+               producto: true,
                // hace referencia a Restricciones (servicio) o caracteristicas (producto)
                infoAdicional: "Leche 1L",
                precio: "sin precio asignado",
@@ -36,6 +38,8 @@ let comercios = {
                supermercado: true,
                perfumeria: false,
                otros: false,
+               servicio: false,
+               producto: true,
                // hace referencia a Restricciones (servicio) o caracteristicas (producto)
                infoAdicional: "Leche 1L",
                precio: "$1.200",
@@ -51,6 +55,8 @@ let comercios = {
                supermercado: false,
                perfumeria: true,
                otros: false,
+               servicio: false,
+               producto: true,
                categoria: "perfumeria",
                // hace referencia a Restricciones (servicio) o caracteristicas (producto)
                infoAdicional: "50ml",
@@ -81,9 +87,125 @@ let comercios = {
                supermercado: false,
                perfumeria: false,
                otros: true,
+               servicio: false,
+               producto: true,
                // hace referencia a Restricciones (servicio) o caracteristicas (producto)
                infoAdicional: "5kg de asado",
                precio: "$5.000",
+               estado: "vigente",
+
+            }
+         ]
+      },
+      {
+         nombre: "Salto del Tabaquillo",
+         detalle: "Centro de actividades el Salto",
+         direccion: "San Luis",
+         coordenadas: [-32.34519807906826, -64.94462049586063],
+         horario: "Lunes a Domingo de 8 a 20hrs",
+         telefono: "1123457895",
+         img1: "https://lh5.googleusercontent.com/p/AF1QipPpOnWSevt10RrzsxVb_-jwHntngjofHeZeN2kT=w408-h544-k-no",
+         supermercado: false,
+         perfumeria: false,
+         otros: true,
+         avisos: [
+            {
+               nombre: "Salto de la cascada",
+               detalle: "asado finito",
+               img1: "https://www.eluniversal.com.mx/resizer/E_Ed6dwBDEU_0ZFIJK9F3LlbWdk=/1100x666/cloudfront-us-east-1.images.arcpublishing.com/eluniversal/HPCJSKD5YVC5TPVAGX3LR2PHNY.jpg",
+               img2: "https://i.pinimg.com/originals/a6/2d/c5/a62dc52302f90004794b7bd5670930b1.jpg",
+               img3: "https://www.elsoldeparral.com.mx/incoming/n20v3n-cascada-foto-mariano-rubio2.jpg/ALTERNATES/LANDSCAPE_1140/CASCADA%20FOTO%20MARIANO%20RUBIO2.jpg",
+               supermercado: false,
+               perfumeria: false,
+               otros: true,
+               servicio: true,
+               producto: false,
+               // hace referencia a Restricciones (servicio) o caracteristicas (producto)
+               infoAdicional: "Apto para mayores de 12 años",
+               precio: "$5.000",
+               estado: "vigente",
+
+            },
+            {
+               nombre: "Tirolesa",
+               detalle: "Salto en tirolesa",
+               img1: "https://bpprivilegeclub.com/blog/wp-content/uploads/2020/08/Zip-Line-Anamuya.jpg",
+               img2: "https://media-cdn.tripadvisor.com/media/photo-s/0f/8c/0e/9d/salto-em-dupla.jpg",
+               img3: "https://previews.123rf.com/images/rh2010/rh20101507/rh2010150700305/43573748-mujer-joven-en-el-usar-ocasional-con-paseos-casco-rojo-en-una-tirolesa-en-las-monta%C3%B1as-especie.jpg",
+               supermercado: false,
+               perfumeria: false,
+               otros: true,
+               servicio: true,
+               producto: false,
+               // hace referencia a Restricciones (servicio) o caracteristicas (producto)
+               infoAdicional: "Apto para mayores de 12 años",
+               precio: "$7.000",
+               estado: "vigente",
+
+            }
+         ]
+      }
+      ,
+      {
+         nombre: "Panaderia La Florida",
+         detalle: "pan, tortas y desayunos",
+         direccion: "Merlo, San Luis",
+         coordenadas: [-32.335379596175216, -65.01576113994042],
+         horario: "Lunes a Domingo de 8 a 14",
+         telefono: "1123457895",
+         img1: "https://lh5.googleusercontent.com/p/AF1QipOTRFfvT8Uft-T0jPZJx37BFfORccTkOyRTV1FG=w426-h240-k-no",
+         supermercado: false,
+         perfumeria: false,
+         otros: true,
+         avisos: [
+            {
+               nombre: "Pan",
+               detalle: "1kg",
+               img1: "https://a.storyblok.com/f/120479/6d797da1b3/mitos-pan-1.jpg",
+               img2: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhoi4UTi0Tg_5SmQ8KmYK6dVMG0yrwtWx5Xg&usqp=CAU",
+               img3: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ_JczQk0fVsXDR6dokT6s2m8Apy_8f2MHgw&usqp=CAU",
+               supermercado: false,
+               perfumeria: false,
+               otros: true,
+               servicio: false,
+               producto: true,
+               // hace referencia a Restricciones (servicio) o caracteristicas (producto)
+               infoAdicional: "Pan Frances",
+               precio: "$1.100",
+               estado: "vigente",
+
+            },
+            {
+               nombre: "Delivery Desayuno para 2 Personas",
+               detalle: "1kg de pan, 1 torta de ricota y 2 jugos exprimidos",
+               img1: "https://fanbag.com.ar/imagenes/thumb/78/17578_tentacionesacasa-600x460_95_600x460_f.jpg",
+               img2: "https://cocina-casera.com/wp-content/uploads/2018/04/desayuno-ingl%C3%A9s-2.jpg",
+               img3: "https://thumbs.dreamstime.com/z/desayuno-en-cama-con-te-quiero-el-texto-una-nota-la-taza-de-caf%C3%A9-jugo-macarrones-subi%C3%B3-flor-bandeja-madera-rom%C3%A1ntico-133817600.jpg",
+               supermercado: false,
+               perfumeria: false,
+               otros: true,
+               servicio: true,
+               producto: false,
+               // hace referencia a Restricciones (servicio) o caracteristicas (producto)
+               infoAdicional: "Servicio a domicilio",
+               precio: "$3.500",
+               estado: "vigente",
+
+            },
+            {
+               nombre: "Torta artesanal",
+               detalle: "Torta artesanal de 5kg",
+               img1: "https://www.mendoza.gov.ar/wp-content/uploads/sites/49/2019/10/DOLCE-LUC%C3%8DA-17.jpg",
+               img2: "https://i.ytimg.com/vi/U9yd38hXago/maxresdefault.jpg",
+               img3: "https://www.lanacion.com.ar/resizer/v2/torta-HB4RI5VI3ZHRNPIEZGN3MM3LME.png?auth=0b0329a1dc91105d6e45458a9fff828231da8018489bd4d922f4e117e68fd567&width=420&height=280&quality=70&smart=true",
+               supermercado: false,
+               perfumeria: false,
+               otros: true,
+               servicio: false,
+               producto: true,
+               // hace referencia a Restricciones (servicio) o caracteristicas (producto)
+               infoAdicional: "Torta a eleccion",
+               precio: "$2.500",
                estado: "vigente",
 
             }
@@ -246,55 +368,55 @@ function filtrarAvisos() {
 
          switch (true) {
             case filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked && filtroOtrosIsChecked:
-                if (aviso.supermercado || aviso.perfumeria || aviso.otros) {
-                    produc.push(aviso);
-                    comerciosParaElmapa.push(comercios);
-                }
-                break;
-        
+               if (aviso.supermercado || aviso.perfumeria || aviso.otros) {
+                  produc.push(aviso);
+                  comerciosParaElmapa.push(comercios);
+               }
+               break;
+
             case filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked && !filtroOtrosIsChecked:
-                if (aviso.supermercado || aviso.perfumeria) {
-                    produc.push(aviso);
-                    comerciosParaElmapa.push(comercios);
-                }
-                break;
-        
+               if (aviso.supermercado || aviso.perfumeria) {
+                  produc.push(aviso);
+                  comerciosParaElmapa.push(comercios);
+               }
+               break;
+
             case filtroSupermercadoIsChecked && !filtroPerfumeriaIsChecked && filtroOtrosIsChecked:
-                if (aviso.supermercado || aviso.otros) {
-                    produc.push(aviso);
-                    comerciosParaElmapa.push(comercios);
-                }
-                break;
-        
+               if (aviso.supermercado || aviso.otros) {
+                  produc.push(aviso);
+                  comerciosParaElmapa.push(comercios);
+               }
+               break;
+
             case filtroSupermercadoIsChecked && !filtroPerfumeriaIsChecked && !filtroOtrosIsChecked:
-                if (aviso.supermercado) {
-                    produc.push(aviso);
-                    comerciosParaElmapa.push(comercios);
-                }
-                break;
-        
+               if (aviso.supermercado) {
+                  produc.push(aviso);
+                  comerciosParaElmapa.push(comercios);
+               }
+               break;
+
             case !filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked && filtroOtrosIsChecked:
-                if (aviso.perfumeria || aviso.otros) {
-                    produc.push(aviso);
-                    comerciosParaElmapa.push(comercios);
-                }
-                break;
-        
+               if (aviso.perfumeria || aviso.otros) {
+                  produc.push(aviso);
+                  comerciosParaElmapa.push(comercios);
+               }
+               break;
+
             case !filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked && !filtroOtrosIsChecked:
-                if (aviso.perfumeria) {
-                    produc.push(aviso);
-                    comerciosParaElmapa.push(comercios);
-                }
-                break;
-        
+               if (aviso.perfumeria) {
+                  produc.push(aviso);
+                  comerciosParaElmapa.push(comercios);
+               }
+               break;
+
             case !filtroSupermercadoIsChecked && !filtroPerfumeriaIsChecked && filtroOtrosIsChecked:
-                if (aviso.otros) {
-                    produc.push(aviso);
-                    comerciosParaElmapa.push(comercios);
-                }
-                break;
-        }
-        
+               if (aviso.otros) {
+                  produc.push(aviso);
+                  comerciosParaElmapa.push(comercios);
+               }
+               break;
+         }
+
       })
 
    })
@@ -366,7 +488,7 @@ function añadirAvisosAlDOM(avisos) {
 
 
 // Crea en el HTML la lista con comercios a mostrar, segun el listado de comercios que le brinden
-function añadirComerciosAlDOM(comercios){
+function añadirComerciosAlDOM(comercios) {
    comercios.forEach((comercio) => {
 
       const div = document.createElement(`div`)
