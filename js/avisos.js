@@ -211,6 +211,72 @@ let comercios = {
             }
          ]
       }
+      ,
+      {
+         nombre: "Lo de Villa Regionales",
+         detalle: "Chocolates, alfajores, perfumes y vinos",
+         direccion: "74, San Luis, Chaco",
+         coordenadas: [-32.33648281345723, -64.9841003323629],
+         horario: "Lunes a Domingo de 8 a 21hrs",
+         telefono: "1123457895",
+         img1: "https://lh5.googleusercontent.com/p/AF1QipPruF1V1pFNLPi_9zwKyMPzPcSBCtapO4FzEQD3=w408-h725-k-no",
+         supermercado: false,
+         perfumeria: false,
+         otros: true,
+         avisos: [
+            {
+               nombre: "Chocolates Reginales",
+               detalle: "1kg",
+               img1: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa7fxhMHzL9bdAWGAmon-nsQ92EGC7UTBmRsU0Uqe28NDhNndXwqKc6qHBtkqGlp0ezi4&usqp=CAU",
+               img2: "https://1.bp.blogspot.com/_j5Jgz8c3qv4/TKDlUhJehEI/AAAAAAAAAHI/G3FRpx_Y9SY/s1600/chocococococ.jpg",
+               img3: "https://c8.alamy.com/compes/eekk85/chocolate-artesanal-con-algunos-de-los-ingredientes-que-se-utilizan-en-estos-chocolates-eekk85.jpg",
+               supermercado: false,
+               perfumeria: false,
+               otros: true,
+               servicio: false,
+               producto: true,
+               // hace referencia a Restricciones (servicio) o caracteristicas (producto)
+               infoAdicional: "Chocolate",
+               precio: "$11.100",
+               estado: "vigente",
+
+            },
+            {
+               nombre: "Perfume Regional El Limpio",
+               detalle: "Varias fragancias de 40ml",
+               img1: "https://thisisyung.com/wp-content/uploads/2023/09/rs-OJAR_EDP_100ml_3.jpg.webp",
+               img2: "https://diariolaopinion.com.ar/download/multimedia.normal.ab831a1fafe5d9a4.50657266756d65735f6e6f726d616c2e77656270.webp",
+               img3: "https://www.inbodas.com/wp-content/uploads/2022/04/blog-bodas-perfumes-11.jpg",
+               supermercado: false,
+               perfumeria: true,
+               otros: false,
+               servicio: false,
+               producto: true,
+               // hace referencia a Restricciones (servicio) o caracteristicas (producto)
+               infoAdicional: "Perfume Regional 40ml",
+               precio: "$30.500",
+               estado: "vigente",
+
+            },
+            {
+               nombre: "alfajores  artesanal",
+               detalle: "caja de 12 alfajores",
+               img1: "https://almacenfamily.com/productos/7798136470011-3332-6019c540d52be.jpg",
+               img2: "https://dulceres.com.ar/wp-content/uploads/2020/02/DSC0019-scaled-e1581172576923-1024x493.jpg",
+               img3: "https://blog.winesofargentina.com/wp-content/uploads/2022/04/alfajores-argentinos-Image-2022-04-06-at-1.07.07-PM-1.jpeg-1024x691.jpg",
+               supermercado: false,
+               perfumeria: false,
+               otros: true,
+               servicio: false,
+               producto: true,
+               // hace referencia a Restricciones (servicio) o caracteristicas (producto)
+               infoAdicional: "Torta a eleccion",
+               precio: "$2.500",
+               estado: "vigente",
+
+            }
+         ]
+      }
    ]
 }
 
@@ -235,6 +301,8 @@ var comercioIcon = L.icon({
 
 //llena el mapa con los comercios que corresponden a la busqueda
 function llenarMapa(comerciosACompletar) {
+
+   //console.log(comerciosACompletar);
 
    contenedorDeComercios.innerHTML = "";
    añadirComerciosAlDOM(comerciosACompletar);
@@ -359,9 +427,15 @@ function filtrarAvisos() {
 
    var produc = [];
    var comerciosParaElmapa = [];
+   var cont = 0;
 
 
    comercio.forEach((comercios) => {
+
+      console.log(comercios)
+      cont = cont + 1;
+
+      console.log(cont)
 
 
       comercios.avisos.forEach((aviso) => {
@@ -370,49 +444,63 @@ function filtrarAvisos() {
             case filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked && filtroOtrosIsChecked:
                if (aviso.supermercado || aviso.perfumeria || aviso.otros) {
                   produc.push(aviso);
-                  comerciosParaElmapa.push(comercios);
+                  if (!comerciosParaElmapa.includes(comercios)) {
+                     comerciosParaElmapa.push(comercios);
+                 }
                }
                break;
 
             case filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked && !filtroOtrosIsChecked:
                if (aviso.supermercado || aviso.perfumeria) {
                   produc.push(aviso);
-                  comerciosParaElmapa.push(comercios);
+                  if (!comerciosParaElmapa.includes(comercios)) {
+                     comerciosParaElmapa.push(comercios);
+                 }
                }
                break;
 
             case filtroSupermercadoIsChecked && !filtroPerfumeriaIsChecked && filtroOtrosIsChecked:
                if (aviso.supermercado || aviso.otros) {
                   produc.push(aviso);
-                  comerciosParaElmapa.push(comercios);
+                  if (!comerciosParaElmapa.includes(comercios)) {
+                     comerciosParaElmapa.push(comercios);
+                 }
                }
                break;
 
             case filtroSupermercadoIsChecked && !filtroPerfumeriaIsChecked && !filtroOtrosIsChecked:
                if (aviso.supermercado) {
                   produc.push(aviso);
-                  comerciosParaElmapa.push(comercios);
+                  if (!comerciosParaElmapa.includes(comercios)) {
+                     comerciosParaElmapa.push(comercios);
+                 }
                }
                break;
 
             case !filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked && filtroOtrosIsChecked:
                if (aviso.perfumeria || aviso.otros) {
                   produc.push(aviso);
-                  comerciosParaElmapa.push(comercios);
+                  if (!comerciosParaElmapa.includes(comercios)) {
+                     comerciosParaElmapa.push(comercios);
+                 }
                }
                break;
 
             case !filtroSupermercadoIsChecked && filtroPerfumeriaIsChecked && !filtroOtrosIsChecked:
                if (aviso.perfumeria) {
                   produc.push(aviso);
-                  comerciosParaElmapa.push(comercios);
+                  if (!comerciosParaElmapa.includes(comercios)) {
+                     comerciosParaElmapa.push(comercios);
+                 }
                }
                break;
 
             case !filtroSupermercadoIsChecked && !filtroPerfumeriaIsChecked && filtroOtrosIsChecked:
                if (aviso.otros) {
                   produc.push(aviso);
-                  comerciosParaElmapa.push(comercios);
+                  if (!comerciosParaElmapa.includes(comercios)) {
+                     comerciosParaElmapa.push(comercios);
+                 }
                }
                break;
          }
