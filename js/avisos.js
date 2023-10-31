@@ -575,6 +575,8 @@ function añadirAvisosAlDOM(avisos) {
 }
 
 
+
+
 // Crea en el HTML la lista con comercios a mostrar, segun el listado de comercios que le brinden
 function añadirComerciosAlDOM(comercios) {
    comercios.forEach((comercio) => {
