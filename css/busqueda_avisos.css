@@ -1,5 +1,5 @@
 #pag{
-    height: 100vh;
+    background-color: darkcyan;
     display: grid;
     grid-template-columns: 40% 40% 20%;
     grid-template-areas: 
